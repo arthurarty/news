@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3o(hgl4jm%)1yh4gz5cawq!odxa#qn%nbrr&3lu)!$!a!u=t2('
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,8 +80,12 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'momo'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
