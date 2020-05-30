@@ -11,8 +11,8 @@ class ArticleTest(APITestCase):
         article.headline = "Getting started"
         article.summary = "Getting Started"
         article.image_url = "https://pixabay.com/images/id-1031754/"
+        article.url = "example.com"
         article.author = "John Doe"
-        article.slug = "getting_started"
         article.save()
         url = reverse('articles:index')
         response = self.client.get(url)
